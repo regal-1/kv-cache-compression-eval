@@ -18,3 +18,16 @@ As LLMs increasingly operate on long contexts (100K+ tokens), the KV attention c
 - **Task type matters more than method choice.** Summarization (GovReport) retains 77–86% of baseline performance even at 10% budget. QA tasks rarely exceed 40% retention even at 50% budget.
 - **Compression does not reduce latency** in pipeline-level implementations. All methods are slower than the uncompressed baseline (1.27s/sample). RKV is the slowest at 3.3–3.6s; AdaKV and KNorm are the most efficient compressed methods at 1.6–2.0s.
 - **No method dominates across all tasks.** ScissorHands leads on 2WikiMQA, SnapKV on GovReport, ChunkKV on Qasper.
+
+## Notebook
+ 
+Full implementation, eviction logic, evaluation pipeline, and results are in [`rkv_chunkv_eval.ipynb`](rkv_chunkv_eval.ipynb).
+ 
+## Setup
+ 
+```bash
+pip install transformers datasets torch accelerate kvpress rouge
+```
+ 
+Experiments were run on a GPU with `Qwen/Qwen2.5-1.5B-Instruct` loaded in `bfloat16`.
+ 
